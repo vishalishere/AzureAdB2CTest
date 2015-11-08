@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using AzureAdApp.Handlers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,11 @@ namespace AzureAdApp
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private async void LoginButtonClick(object sender, RoutedEventArgs e)
+        {
+            await AuthenticationHandler.GetAuthorizationHeaderAsync();
         }
     }
 }

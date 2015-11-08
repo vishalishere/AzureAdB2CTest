@@ -14,7 +14,7 @@ namespace AzureAdApp.Handlers
         private static string _clientId = "";
         private static Uri _redirect = new Uri("");
 
-        public async static Task<AuthenticationResult> GetAuthorizationHeader()
+        public async static Task<AuthenticationResult> GetAuthorizationHeaderAsync()
         {
             AuthenticationResult result = null;
 
