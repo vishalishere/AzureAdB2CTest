@@ -10,9 +10,9 @@ namespace AzureAdApp.Handlers
 {
     public static class AuthenticationHandler
     {
-        private static string _resource = "";
-        private static string _clientId = "";
-        private static Uri _redirect = new Uri("");
+        private static string _resource = "https://<domainname>.onmicrosoft.com/";
+        private static string _clientId = "af96b2a3-81c6-4614-b2ff-1de50f6b2d89";
+        private static Uri _redirect = new Uri("urn:ietf:wg:oauth:2.0:oob");
 
         public async static Task<AuthenticationResult> GetAuthorizationHeaderAsync()
         {

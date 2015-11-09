@@ -26,9 +26,6 @@ namespace AzureAdApp
     /// </summary>
     sealed partial class App : Microsoft.Practices.Prism.Mvvm.MvvmAppBase
     {
-        public static string AdApplicationId = "";
-        public static string AdApplicationUnitId = "";
-
         private readonly IUnityContainer _container = new UnityContainer();
         public App()
         {

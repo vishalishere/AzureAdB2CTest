@@ -13,7 +13,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using AzureAdApp.Handlers;
+using System.Diagnostics;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AzureAdApp.Views
@@ -28,9 +30,11 @@ namespace AzureAdApp.Views
             this.InitializeComponent();
         }
 
-        private void Hub_Holding(object sender, HoldingRoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            AuthenticationResult token = await AuthenticationHandler.GetAuthorizationHeaderAsync();
 
+            Debug.WriteLine("token:" + token.AccessToken);
         }
     }
 }
