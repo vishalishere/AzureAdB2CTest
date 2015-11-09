@@ -13,7 +13,30 @@
     <d:Page.DataContext>
         <design:LoginPageDesignViewModel />
     </d:Page.DataContext>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel x:Name="LeftTop" Grid.Column="0" Orientation="Horizontal" >
+                <TextBlock x:Name="ApplicationTitle" 
+                           Text="{Binding Title}" 
+                           Style="{StaticResource SampleHeaderTextStyle}" 
+                           TextWrapping="Wrap" MaxLines="4"  />
+            </StackPanel>
+            <StackPanel x:Name="RightTop" Grid.Column="1" Orientation="Horizontal">
+                <Button Content="Login" />
+            </StackPanel>
+            
+        </Grid>
     </Grid>
+
+
 </page:PrismPage>

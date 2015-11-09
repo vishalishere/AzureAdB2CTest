@@ -27,5 +27,10 @@ namespace AzureAdApp.Views
         {
             this.InitializeComponent();
         }
+
+        private void Hub_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+
+        }
     }
 }

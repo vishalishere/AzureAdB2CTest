@@ -12,7 +12,7 @@ namespace AzureAdApp.ViewModels
     {
         public LoginPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-
+            this.Title = "Login screen";
         }
 
         public string Title { get; set; }

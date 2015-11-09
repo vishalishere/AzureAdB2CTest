@@ -26,8 +26,8 @@ namespace AzureAdApp
     /// </summary>
     sealed partial class App : Microsoft.Practices.Prism.Mvvm.MvvmAppBase
     {
-        public static string AdApplicationId = "04305479-54e7-4d59-8aaa-1ad2a9e63f20";
-        public static string AdApplicationUnitId = "251162";
+        public static string AdApplicationId = "";
+        public static string AdApplicationUnitId = "";
 
         private readonly IUnityContainer _container = new UnityContainer();
         public App()
@@ -41,9 +41,7 @@ namespace AzureAdApp
 
         public enum Experiences
         {
-            Login,
-            DashBoard,
-            ResourceTemplateGallery
+            Login
         }
 
         protected override Task OnInitializeAsync(IActivatedEventArgs args)
@@ -62,7 +60,7 @@ namespace AzureAdApp
 
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-            this.NavigationService.Navigate(Experiences.ResourceTemplateGallery.ToString(), null);
+            this.NavigationService.Navigate(Experiences.Login.ToString(), null);
             return System.Threading.Tasks.Task.FromResult<object>(null);
         }
     }
