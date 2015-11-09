@@ -62,7 +62,6 @@ namespace AzureAdApp
 
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-
             this.NavigationService.Navigate(Experiences.ResourceTemplateGallery.ToString(), null);
             return System.Threading.Tasks.Task.FromResult<object>(null);
         }

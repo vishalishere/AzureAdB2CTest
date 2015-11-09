@@ -9,32 +9,12 @@ namespace AzureAdApp
         public static void RegisterContainers(IUnityContainer container)
         {
             _container = container;
-            RegisterSubscription();
-            RegisterResourceGallery();
+            RegisterCommon();
         }
 
-        private static void RegisterResourceGallery()
+        private static void RegisterCommon()
         {
-            //_container
-            //    .RegisterType<IResourceTemplateGalleryManager, ResourceTemplateGalleryManager>(
-            //            new ContainerControlledLifetimeManager());
-            //_container
-            //    .RegisterType<IResourceTemplateGalleryRepository, ResourceTemplateGalleryRepository>(
-            //        new ContainerControlledLifetimeManager());
 
         }
-        private static void RegisterSubscription()
-        {
-        //    _container
-        //        .RegisterType<ISubscriptionManager, SubscriptionManager>(
-        //        new ContainerControlledLifetimeManager());
-        //    _container
-        //        .RegisterType<ISubscriptionRepository, SubscriptionRepository>(
-        //            new ContainerControlledLifetimeManager());
-        //    _container
-        //        .RegisterType<ISubscriptionFactory, SubscriptionFactory>(
-        //            new ContainerControlledLifetimeManager());
-        }
-
     }
 }
