@@ -1,24 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using AzureAdApp.PageBase;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using AzureAdApp.Handlers;
-using System.Diagnostics;
-using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
-using Windows.Security.Authentication.Web.Provider;
-using Windows.Security.Authentication.Web.Core;
-using Windows.Security.Credentials;
 using System.Net.Http;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -53,11 +36,21 @@ namespace AzureAdApp.Views
             GetValues(token.Token);
         }
 
+        private async void SignupButton_Click(object sender, RoutedEventArgs e)
+        {
+            LogWindow.Text = "";
+
+            var token = await AuthenticationHandler.CreateAccountAsync();
+            AddText("token:" + token.Token);
+            GetValues(token.Token);
+        }
+
 
         private async void GetValues(string token)
         {
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization = 
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             // Call to ApiAppOne
             try
             {

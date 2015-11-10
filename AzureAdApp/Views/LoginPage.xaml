@@ -33,9 +33,11 @@
             </StackPanel>
             <StackPanel x:Name="RightTop" Grid.Column="1" Orientation="Horizontal">
                 <Button Content="Login" x:Name="LoginButton" Click="LoginButton_Click" />
+                <Button Content="Signup" x:Name="SignupButton" Click="SignupButton_Click" />
             </StackPanel>
         </Grid>
         <TextBox Grid.Row="1" x:Name="LogWindow" IsReadOnly="True" TextWrapping="Wrap" MaxLength="5000" />
+        
     </Grid>
 
 
