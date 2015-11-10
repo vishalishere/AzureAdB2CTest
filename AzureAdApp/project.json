@@ -3,7 +3,7 @@
     "Microsoft.ApplicationInsights": "1.0.0",
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0",
     "Microsoft.ApplicationInsights.WindowsApps": "1.0.0",
-    "Microsoft.IdentityModel.Clients.ActiveDirectory": "3.5.208051316-alpha",
+    "Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory": "4.0.209160138-alpha",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "Prism.StoreApps": "2.0.0",
     "Unity": "4.0.1"

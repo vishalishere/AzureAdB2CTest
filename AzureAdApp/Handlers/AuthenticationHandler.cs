@@ -1,60 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
 
 namespace AzureAdApp.Handlers
 {
     public static class AuthenticationHandler
     {
-        private static string _resource = "https://<domainname>.onmicrosoft.com/";
-        private static string _clientId = "af96b2a3-81c6-4614-b2ff-1de50f6b2d89";
-        private static Uri _redirect = new Uri("urn:ietf:wg:oauth:2.0:oob");
+        private static string _tenant = "<tenant>.onmicrosoft.com/";
+        private static string _clientId = "app id from Azure AD ie: df62d34a-d675-4a10-b01c-b22e70035c7e";
+        private static Uri _redirect = new Uri("urn:ietf:wg:oauth:2.0:oob"); // 
+
+        private static string _aadInstance = "https://login.microsoftonline.com/{0}";
+
+        private static AuthenticationContext authContext = null;
+        private static string authority = String.Format(CultureInfo.InvariantCulture, _aadInstance, _tenant);
 
         public async static Task<AuthenticationResult> GetAuthorizationHeaderAsync()
         {
+            authContext = new AuthenticationContext(authority, false);
             AuthenticationResult result = null;
-
-            AuthenticationContext context = new AuthenticationContext("https://login.windows.net/common"); // tenant agnostic endpooint
             try
             {
-
-                var param = new PlatformParameters(PromptBehavior.Always, false);
-                try
-                {
-                    result = await context.AcquireTokenSilentAsync(_resource, _clientId);
-                }
-                catch (Exception)
-                {
-                    var tokenResult = context.AcquireTokenAsync(_resource, _clientId,
-                    _redirect, param);
-
-                    await tokenResult.ContinueWith(t => {
-                        Debug.WriteLine($"continued.... {t.Result.AccessToken}");
-
-                        result = t.Result;
-                    });
-
-                }
+                string[] scope = { _clientId };
+                string[] additionalScope = { "" };
+                bool useCorporateNetwork = false;
+                string policy = "B2C_1_Sign_in_policy";
+                string extraQueryParams = "";
+                UserIdentifier user = UserIdentifier.AnyUser;
+                IPlatformParameters platformParameters = new PlatformParameters(PromptBehavior.Always, useCorporateNetwork);
+                result = await authContext.AcquireTokenAsync(scope, additionalScope, 
+                    _clientId, _redirect,platformParameters,user, extraQueryParams, policy);
 
 
-
-                // result.Wait();
+                return result;
             }
-            catch (Exception ex)
+            catch (AdalException ex)
             {
                 Debug.WriteLine(ex.Message);
+                throw;
             }
-
-            if (result == null)
+            catch(Exception ex)
             {
-                throw new InvalidOperationException("Failed to obtain the JWT token");
+                Debug.WriteLine(ex.Message);
+                throw;
             }
-
-            return result;
         }
     }
 }

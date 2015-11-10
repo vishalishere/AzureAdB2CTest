@@ -15,7 +15,11 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using AzureAdApp.Handlers;
 using System.Diagnostics;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Experimental.IdentityModel.Clients.ActiveDirectory;
+using Windows.Security.Authentication.Web.Provider;
+using Windows.Security.Authentication.Web.Core;
+using Windows.Security.Credentials;
+using System.Net.Http;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AzureAdApp.Views
@@ -32,9 +36,56 @@ namespace AzureAdApp.Views
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            AuthenticationResult token = await AuthenticationHandler.GetAuthorizationHeaderAsync();
+            LogWindow.Text = "";
+            try
+            {
+                HttpClient client = new HttpClient();
+                var result = await client.GetStringAsync("http://localhost:28967/api/values");
+                AddText(result);
+            }
+            catch(Exception ex)
+            {
+                AddText(ex.Message);
+            }
 
-            Debug.WriteLine("token:" + token.AccessToken);
+            var token = await AuthenticationHandler.GetAuthorizationHeaderAsync();
+            AddText("token:" + token.Token);
+            GetValues(token.Token);
+        }
+
+
+        private async void GetValues(string token)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            // Call to ApiAppOne
+            try
+            {
+                var apiAppOne = await client.GetStringAsync("http://localhost:28967/api/values");
+                AddText("Response from ApiAppOne: " + apiAppOne);
+            }
+            catch(Exception ex)
+            {
+                AddText("Exception from ApiAppOne: " + ex.Message);
+
+            }
+
+            // call to ApiAppTwo
+            try
+            {
+                var apiAppTwo = await client.GetStringAsync("http://localhost:28997/api/values");
+                AddText("Response from ApiAppTwo: " + apiAppTwo);
+            }
+            catch (Exception ex)
+            {
+                AddText("Exception from ApiAppTwo: " + ex.Message);
+            }
+        }
+
+
+        private void AddText(string text)
+        {
+            LogWindow.Text = LogWindow.Text + Environment.NewLine + text;
         }
     }
 }

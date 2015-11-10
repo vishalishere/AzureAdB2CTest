@@ -9,10 +9,11 @@ namespace ApiAppTwo.Controllers
 {
     public class ValuesController : ApiController
     {
+        [Authorize(Roles = "testgroup")]
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "value4", "value5" };
         }
 
         // GET api/values/5
