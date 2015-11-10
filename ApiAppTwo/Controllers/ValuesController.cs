@@ -9,7 +9,7 @@ namespace ApiAppTwo.Controllers
 {
     public class ValuesController : ApiController
     {
-        [Authorize(Roles = "testgroup")]
+        [Authorize]
         // GET api/values
         public IEnumerable<string> Get()
         {
