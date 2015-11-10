@@ -17,7 +17,7 @@ namespace ApiAppOne.Controllers
         {
             try
             {
-                string userId = ClaimsPrincipal.Current.FindFirst(t => t.Type == "objectId").Value;
+                string userId = ClaimsPrincipal.Current.FindFirst(t => t.Type == "emails").Value;
                 Debug.WriteLine("User ID GUID: " + userId);
             }
             catch (Exception ex)
