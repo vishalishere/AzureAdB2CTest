@@ -11,8 +11,8 @@ namespace AzureAdApp.Handlers
 {
     public static class AuthenticationHandler
     {
-        private static string _tenant = "testb2cthemoon.onmicrosoft.com/";
-        private static string _clientId = "df62d34a-d675-4a10-b01c-b22e70035c7e";
+        private static string _tenant = "[tenantname].onmicrosoft.com/";
+        private static string _clientId = "(ie: df62d34a-d675-4a10-b01c-b22e70035c7e)";
         private static Uri _redirect = new Uri("urn:ietf:wg:oauth:2.0:oob");
 
         private static string _signInPolicy = "B2C_1_Sign_in_policy";

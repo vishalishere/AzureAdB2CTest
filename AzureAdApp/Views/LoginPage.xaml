@@ -32,6 +32,7 @@
                            TextWrapping="Wrap" MaxLines="4"  />
             </StackPanel>
             <StackPanel x:Name="RightTop" Grid.Column="1" Orientation="Horizontal">
+                <Button Content="Clear"  x:Name="ClearButton" Click="ClearButton_Click" />
                 <Button Content="Get data"  x:Name="GetDataButton" Click="GetDataButton_Click" />
                 <Button Content="Login" x:Name="LoginButton" Click="LoginButton_Click" />
                 <Button Content="Signup" x:Name="SignupButton" Click="SignupButton_Click" />
