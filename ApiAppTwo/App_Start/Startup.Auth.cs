@@ -2,8 +2,9 @@
 using Owin;
 using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.IdentityModel.Tokens;
-using AzureAd.B2C.Authentication.Providers;
+using ApiAppTwo.Providers;
 using Microsoft.Owin.Security.Jwt;
 
 namespace ApiAppTwo
@@ -22,10 +23,11 @@ namespace ApiAppTwo
             {
                 ValidAudience = clientId,
             };
-
+            string formatString = String.Format(aadInstance, tenant, "v2.0", discoverySuffix, commonPolicy);
+            Debug.WriteLine("formatstring: " + formatString);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions
             {
-                AccessTokenFormat = new JwtFormat(tvps, new OpenIdConnectCachingSecurityTokenProvider(String.Format(aadInstance, tenant, "v2.0", discoverySuffix, commonPolicy)))
+                AccessTokenFormat = new JwtFormat(tvps, new OpenIdConnectCachingSecurityTokenProvider(formatString))
             });
         }
     }

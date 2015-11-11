@@ -3,7 +3,7 @@ using Owin;
 using System;
 using System.Configuration;
 using System.IdentityModel.Tokens;
-using AzureAd.B2C.Authentication.Providers;
+using ApiAppOne.Providers;
 using Microsoft.Owin.Security.Jwt;
 
 namespace ApiAppOne

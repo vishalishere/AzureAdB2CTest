@@ -17,13 +17,14 @@ namespace ApiAppOne.Controllers
         {
             try
             {
-                string userId = ClaimsPrincipal.Current.FindFirst(t => t.Type == "emails").Value;
+                string userId = ClaimsPrincipal.Current.FindFirst(t => t.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
                 Debug.WriteLine("User ID GUID: " + userId);
             }
             catch (Exception ex)
             {
             }
 
+            return new string[] { "value1", "value2", "value3" };
 
             var owner = ClaimsPrincipal.Current;
             var ownerfirst = owner.Claims; // FindFirst("http://schemas.microsoft.com/ws/2008/06/identity/claims/objectidentifier");
@@ -51,7 +52,7 @@ namespace ApiAppOne.Controllers
 
             }
 
-            return new string[] { "value1", "value2", "value3" };
+            
         }
 
         // GET api/values/5

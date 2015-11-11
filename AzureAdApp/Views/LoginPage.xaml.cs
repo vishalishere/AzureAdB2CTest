@@ -12,6 +12,7 @@ namespace AzureAdApp.Views
     /// </summary>
     public sealed partial class LoginPage : PrismPage
     {
+        private string _token = String.Empty;
         public LoginPage()
         {
             this.InitializeComponent();
@@ -32,8 +33,8 @@ namespace AzureAdApp.Views
             }
 
             var token = await AuthenticationHandler.GetAuthorizationHeaderAsync();
-            AddText("token:" + token.Token);
-            GetValues(token.Token);
+            AddText("login token:" + token.Token);
+            _token = token.Token;
         }
 
         private async void SignupButton_Click(object sender, RoutedEventArgs e)
@@ -41,10 +42,14 @@ namespace AzureAdApp.Views
             LogWindow.Text = "";
 
             var token = await AuthenticationHandler.CreateAccountAsync();
-            AddText("token:" + token.Token);
-            GetValues(token.Token);
+            AddText("sign up token:" + token.Token);
+            _token = token.Token;
         }
 
+        private async void GetDataButton_Click(object sender, RoutedEventArgs e)
+        {
+            GetValues(_token);
+        }
 
         private async void GetValues(string token)
         {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Owin.Security.Jwt;
-using Microsoft.IdentityModel.Protocols;
 using System.Threading;
 using System.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Protocols;
 
-namespace AzureAd.B2C.Authentication.Providers
+namespace ApiAppOne.Providers
 {
     public class OpenIdConnectCachingSecurityTokenProvider : IIssuerSecurityTokenProvider
     {
